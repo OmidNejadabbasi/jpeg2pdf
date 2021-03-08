@@ -39,6 +39,7 @@ public class Main extends Application {
         ListView<String> fileListView = new ListView<>();
         fileListView.getItems().add("Omid");
         fileListView.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        fileListView.prefWidthProperty().bind(mainAreaHBox.widthProperty().multiply(0.6));
 
 
 
