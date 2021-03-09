@@ -1,6 +1,7 @@
 package net.omidn.pdfcreator;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -48,8 +49,10 @@ public class Main extends Application {
         removeBtn.setMaxWidth(Double.MAX_VALUE);
         moveDownBtn.setMaxWidth(Double.MAX_VALUE);
         moveUpBtn.setMaxWidth(Double.MAX_VALUE);
-        // TODO add margins to buttons
+        // add margins to buttons
+        btnContainer.setPadding( new Insets(15));
 
+        // TODO turn local variables into fields :(
 
         mainAreaHBox.getChildren().add(fileListView);
         mainAreaHBox.getChildren().add(btnContainer);
