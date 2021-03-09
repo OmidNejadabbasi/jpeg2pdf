@@ -2,10 +2,7 @@ package net.omidn.pdfcreator;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -39,11 +36,23 @@ public class Main extends Application {
         ListView<String> fileListView = new ListView<>();
         fileListView.getItems().add("Omid");
         fileListView.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        fileListView.prefWidthProperty().bind(mainAreaHBox.widthProperty().multiply(0.6));
 
+        HBox.setHgrow(fileListView, Priority.ALWAYS);
+        // adding list editing buttons
+        VBox btnContainer = new VBox();
+        Button removeBtn = new Button("Remove");
+        Button moveUpBtn = new Button("Move Up");
+        Button moveDownBtn = new Button("Move Down");
+        btnContainer.getChildren().addAll(removeBtn, moveUpBtn, moveDownBtn);
+
+        removeBtn.setMaxWidth(Double.MAX_VALUE);
+        moveDownBtn.setMaxWidth(Double.MAX_VALUE);
+        moveUpBtn.setMaxWidth(Double.MAX_VALUE);
+        // TODO add margins to buttons
 
 
         mainAreaHBox.getChildren().add(fileListView);
+        mainAreaHBox.getChildren().add(btnContainer);
 
         rootContainer.getChildren().addAll(appMenuBar, mainAreaHBox);
         Scene scene = new Scene(rootContainer, 700, 400);
