@@ -1,6 +1,7 @@
 package net.omidn.pdfcreator;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -152,6 +153,13 @@ public class Main extends Application {
             }
         });
 
+
+        // quite action on menu item
+        quiteMenuItem.setOnAction(event -> {
+            primaryStage.close();
+            Platform.exit();
+            System.exit(0);
+        });
 
         mainAreaHBox.getChildren().add(listStackPane);
         mainAreaHBox.getChildren().add(btnContainer);
