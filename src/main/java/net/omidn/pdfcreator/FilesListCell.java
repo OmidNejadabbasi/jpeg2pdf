@@ -2,12 +2,17 @@ package net.omidn.pdfcreator;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.text.CharacterIterator;
@@ -57,6 +62,20 @@ public class FilesListCell extends ListCell<String> {
             fileNameLabel.setText("File: " + file.getName());
             fileSizeLabel.setText("Size: " + humanReadableByteCountBin(file.length()));
 
+            container.setOnMouseClicked(event -> {
+                if(event.getClickCount()==2){
+                    Stage imagePreviewStage = new Stage();
+                    Image img = new Image("file:///"+item);
+                    ImageView imageView = new ImageView(img);
+                    ScrollPane pane = new ScrollPane(imageView);
+                    Scene scene = new Scene(pane);
+                    imagePreviewStage.setHeight(700);
+                    imagePreviewStage.setWidth(1000);
+                    imagePreviewStage.setScene(scene);
+                    imagePreviewStage.setTitle("File: "+ item);
+                    imagePreviewStage.show();
+                }
+            });
             setGraphic(container);
         }
 
