@@ -119,6 +119,21 @@ public class Main extends Application {
             }
         });
 
+        moveDownBtn.setOnAction(event -> {
+            ObservableList<Integer> items;
+            if ((items = fileListView.getSelectionModel().getSelectedIndices()) != null) {
+
+                int itemIndex = items.get(0);
+                if (itemIndex != currentFileInList.size()-1) {
+                    String temp = currentFileInList.get(itemIndex + 1);
+                    currentFileInList.set(itemIndex + 1, currentFileInList.get(itemIndex));
+                    currentFileInList.set(itemIndex, temp);
+                    fileListView.getSelectionModel().select(itemIndex + 1);
+                }
+            }
+        });
+
+
 
         mainAreaHBox.getChildren().add(fileListView);
         mainAreaHBox.getChildren().add(btnContainer);
