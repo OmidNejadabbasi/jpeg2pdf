@@ -9,7 +9,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main extends Application {
 
@@ -79,6 +84,20 @@ public class Main extends Application {
         btnContainer.setPadding(new Insets(15));
 
 
+        // ========== Event Handling ===========
+
+        // add files action
+        addFilesMenuItem.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            fileChooser.setTitle("Choose images to convert to PDF: ");
+            FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image (*.jpg, *.png)", "*.jpg", "*.png");
+            fileChooser.getExtensionFilters().add(extensionFilter);
+            List<File> chosenFiles = fileChooser.showOpenMultipleDialog(primaryStage);
+            if (chosenFiles != null) {
+                currentFileInList.addAll(chosenFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
+            }
+        });
 
 
         mainAreaHBox.getChildren().add(fileListView);
