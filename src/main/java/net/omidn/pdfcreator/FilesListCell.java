@@ -21,19 +21,17 @@ public class FilesListCell extends ListCell<String> {
     private Label fileSizeLabel;
 
 
-    public FilesListCell(String fileName) {
+    public FilesListCell() {
         super();
-        File file = new File(fileName);
         container = new HBox();
         container.setPadding(new Insets(5, 0, 5, 15));
         // imageview setup
-        Image thumbnailImg = new Image(fileName, 45, 30, false, false);
-        thumbnail = new ImageView(thumbnailImg);
+        thumbnail = new ImageView();
 
         // details container
         detailsContainer = new VBox();
-        fileNameLabel = new Label("File: " + file.getName());
-        fileSizeLabel = new Label("Size: " + humanReadableByteCountBin(file.length()));
+        fileNameLabel = new Label();
+        fileSizeLabel = new Label();
 
         detailsContainer.getChildren().addAll(fileNameLabel, fileSizeLabel);
 
@@ -45,9 +43,16 @@ public class FilesListCell extends ListCell<String> {
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
 
-        if (empty) {
+        if (empty || item == null) {
+            setText(null);
             setGraphic(null);
         } else {
+            File file = new File(item);
+            Image thumbnailImg = new Image("file:///"+item, 45, 30, false, false);
+            thumbnail.setImage(thumbnailImg);
+            fileNameLabel.setText("File: " + file.getName());
+            fileSizeLabel.setText("Size: " + humanReadableByteCountBin(file.length()));
+
             setGraphic(container);
         }
 
