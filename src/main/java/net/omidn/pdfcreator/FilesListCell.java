@@ -1,6 +1,7 @@
 package net.omidn.pdfcreator;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
@@ -24,12 +25,15 @@ public class FilesListCell extends ListCell<String> {
     public FilesListCell() {
         super();
         container = new HBox();
-        container.setPadding(new Insets(5, 0, 5, 15));
+        container.setPadding(new Insets(5, 0, 5, 10));
+        container.setSpacing(7.0);
+        container.setAlignment(Pos.CENTER_LEFT);
         // imageview setup
         thumbnail = new ImageView();
 
         // details container
         detailsContainer = new VBox();
+        detailsContainer.setAlignment(Pos.CENTER_LEFT);
         fileNameLabel = new Label();
         fileSizeLabel = new Label();
 
@@ -48,7 +52,7 @@ public class FilesListCell extends ListCell<String> {
             setGraphic(null);
         } else {
             File file = new File(item);
-            Image thumbnailImg = new Image("file:///"+item, 45, 30, false, false);
+            Image thumbnailImg = new Image("file:///"+item, 60, 45, false, false);
             thumbnail.setImage(thumbnailImg);
             fileNameLabel.setText("File: " + file.getName());
             fileSizeLabel.setText("Size: " + humanReadableByteCountBin(file.length()));
