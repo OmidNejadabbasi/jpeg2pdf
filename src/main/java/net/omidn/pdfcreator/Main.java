@@ -3,13 +3,13 @@ package net.omidn.pdfcreator;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -33,12 +33,15 @@ public class Main extends Application {
     ListView<String> fileListView;
     ObservableList<String> currentFileInList = FXCollections.observableArrayList();
 
+    Button addFilesBtn;
+
     VBox btnContainer;
     Button removeBtn;
     Button moveUpBtn;
     Button moveDownBtn;
     Button saveAsBtn;
     Scene scene;
+    EventHandler<ActionEvent> addFilesActionEvent;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -68,10 +71,14 @@ public class Main extends Application {
         fileListView.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         fileListView.setItems(currentFileInList);
         fileListView.setCellFactory(lv -> new FilesListCell());
+        addFilesBtn = new Button("Add Files...");
+        StackPane listStackPane = new StackPane(fileListView, addFilesBtn);
+        listStackPane.setAlignment(Pos.CENTER);
+
         // TODO remove this add code
         currentFileInList.add("/home/omid/Desktop/IMG_۲۰۲۱۰۲۲۶_۰۹۳۵۵۷.jpg");
 
-        HBox.setHgrow(fileListView, Priority.ALWAYS);
+        HBox.setHgrow(listStackPane, Priority.ALWAYS);
         // adding list editing buttons
         btnContainer = new VBox();
         removeBtn = new Button("Remove");
@@ -95,7 +102,7 @@ public class Main extends Application {
         // ========== Event Handling ===========
 
         // add files action
-        addFilesMenuItem.setOnAction(event -> {
+        addFilesActionEvent = event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
             fileChooser.setTitle("Choose images to convert to PDF: ");
@@ -105,7 +112,8 @@ public class Main extends Application {
             if (chosenFiles != null) {
                 currentFileInList.addAll(chosenFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
             }
-        });
+        };
+        addFilesMenuItem.setOnAction(addFilesActionEvent);
 
         // remove button action
         removeBtn.setOnAction(event -> {
@@ -142,7 +150,7 @@ public class Main extends Application {
         });
 
 
-        mainAreaHBox.getChildren().add(fileListView);
+        mainAreaHBox.getChildren().add(listStackPane);
         mainAreaHBox.getChildren().add(btnContainer);
 
         rootContainer.getChildren().addAll(appMenuBar, mainAreaHBox);
@@ -151,7 +159,6 @@ public class Main extends Application {
         primaryStage.setTitle("Prototype");
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
