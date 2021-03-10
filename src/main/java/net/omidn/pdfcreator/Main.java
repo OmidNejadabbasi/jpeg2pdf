@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,7 @@ public class Main extends Application {
     Button saveAsBtn;
     Scene scene;
     EventHandler<ActionEvent> addFilesActionEvent;
+    EventHandler<ActionEvent> saveAsActionEvent;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -160,6 +162,31 @@ public class Main extends Application {
             Platform.exit();
             System.exit(0);
         });
+
+
+        // save as action:
+        saveAsActionEvent = event -> {
+            FileChooser destFileChooser = new FileChooser();
+            destFileChooser.setInitialFileName("untitled.pdf");
+            destFileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            destFileChooser.setTitle("Choose your destination PDF file: ");
+            destFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF file(*.pdf)", "*.pdf"));
+            File destFile = destFileChooser.showSaveDialog(primaryStage);
+            if (destFile != null){
+                try {
+                    JPEG2PDFCore.saveFileAsPDF(currentFileInList, destFile);
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "The file was saved successfully :)");
+                    successAlert.show();
+                } catch (IOException e) {
+                    Alert errAlert = new Alert(Alert.AlertType.ERROR, "File couldn't be saved :(");
+                    errAlert.show();
+                }
+            }
+
+        };
+
+        saveAsBtn.setOnAction(saveAsActionEvent);
+        saveAsMenuItem.setOnAction(saveAsActionEvent);
 
         mainAreaHBox.getChildren().add(listStackPane);
         mainAreaHBox.getChildren().add(btnContainer);
