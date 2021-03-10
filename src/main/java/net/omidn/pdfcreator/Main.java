@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -36,6 +37,7 @@ public class Main extends Application {
     Button removeBtn;
     Button moveUpBtn;
     Button moveDownBtn;
+    Button saveAsBtn;
     Scene scene;
 
     @Override
@@ -75,11 +77,17 @@ public class Main extends Application {
         removeBtn = new Button("Remove");
         moveUpBtn = new Button("Move Up");
         moveDownBtn = new Button("Move Down");
-        btnContainer.getChildren().addAll(removeBtn, moveUpBtn, moveDownBtn);
+        saveAsBtn = new Button("Save As...");
+
+
+        Pane _space =new Pane();
+        btnContainer.getChildren().addAll(removeBtn, moveUpBtn, moveDownBtn, _space, saveAsBtn);
+        VBox.setVgrow(_space, Priority.ALWAYS);
 
         removeBtn.setMaxWidth(Double.MAX_VALUE);
         moveDownBtn.setMaxWidth(Double.MAX_VALUE);
         moveUpBtn.setMaxWidth(Double.MAX_VALUE);
+        saveAsBtn.setMaxWidth(Double.MAX_VALUE);
         // add margins to buttons
         btnContainer.setPadding(new Insets(15));
 
@@ -124,7 +132,7 @@ public class Main extends Application {
             if ((items = fileListView.getSelectionModel().getSelectedIndices()) != null) {
 
                 int itemIndex = items.get(0);
-                if (itemIndex != currentFileInList.size()-1) {
+                if (itemIndex != currentFileInList.size() - 1) {
                     String temp = currentFileInList.get(itemIndex + 1);
                     currentFileInList.set(itemIndex + 1, currentFileInList.get(itemIndex));
                     currentFileInList.set(itemIndex, temp);
@@ -132,7 +140,6 @@ public class Main extends Application {
                 }
             }
         });
-
 
 
         mainAreaHBox.getChildren().add(fileListView);
