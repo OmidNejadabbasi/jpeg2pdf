@@ -104,6 +104,20 @@ public class Main extends Application {
             currentFileInList.removeAll(fileListView.getSelectionModel().getSelectedItems());
         });
 
+        // move up button action
+        moveUpBtn.setOnAction(event -> {
+            ObservableList<Integer> items;
+            if ((items = fileListView.getSelectionModel().getSelectedIndices()) != null) {
+
+                int itemIndex = items.get(0);
+                if (itemIndex != 0) {
+                    String temp = currentFileInList.get(itemIndex - 1);
+                    currentFileInList.set(itemIndex - 1, currentFileInList.get(itemIndex));
+                    currentFileInList.set(itemIndex, temp);
+                    fileListView.getSelectionModel().select(itemIndex - 1);
+                }
+            }
+        });
 
 
         mainAreaHBox.getChildren().add(fileListView);
