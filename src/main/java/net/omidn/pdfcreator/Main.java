@@ -75,8 +75,6 @@ public class Main extends Application {
         StackPane listStackPane = new StackPane(fileListView, addFilesBtn);
         listStackPane.setAlignment(Pos.CENTER);
 
-        // TODO remove this add code
-        currentFileInList.add("/home/omid/Desktop/IMG_۲۰۲۱۰۲۲۶_۰۹۳۵۵۷.jpg");
 
         HBox.setHgrow(listStackPane, Priority.ALWAYS);
         // adding list editing buttons
@@ -111,6 +109,7 @@ public class Main extends Application {
             List<File> chosenFiles = fileChooser.showOpenMultipleDialog(primaryStage);
             if (chosenFiles != null) {
                 currentFileInList.addAll(chosenFiles.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
+                addFilesBtn.setVisible(false);
             }
         };
         addFilesMenuItem.setOnAction(addFilesActionEvent);
@@ -118,6 +117,9 @@ public class Main extends Application {
         // remove button action
         removeBtn.setOnAction(event -> {
             currentFileInList.removeAll(fileListView.getSelectionModel().getSelectedItems());
+            if (currentFileInList.size() == 0){
+                addFilesBtn.setVisible(true);
+            }
         });
 
         // move up button action
