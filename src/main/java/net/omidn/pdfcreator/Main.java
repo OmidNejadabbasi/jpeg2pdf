@@ -1,6 +1,8 @@
 package net.omidn.pdfcreator;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -23,6 +25,7 @@ public class Main extends Application {
     HBox mainAreaHBox;
 
     ListView<String> fileListView;
+    ObservableList<String> currentFileInList = FXCollections.observableArrayList();
 
     VBox btnContainer;
     Button removeBtn;
@@ -54,8 +57,12 @@ public class Main extends Application {
 
         //ListView
         fileListView = new ListView<>();
-        fileListView.getItems().add("Omid");
+//        fileListView.getItems().add("Omid");
         fileListView.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        fileListView.setItems(currentFileInList);
+        fileListView.setCellFactory(lv -> new FilesListCell());
+        // TODO remove this add code
+        currentFileInList.add("/home/omid/Desktop/IMG_۲۰۲۱۰۲۲۶_۰۹۳۵۵۷.jpg");
 
         HBox.setHgrow(fileListView, Priority.ALWAYS);
         // adding list editing buttons
@@ -71,7 +78,8 @@ public class Main extends Application {
         // add margins to buttons
         btnContainer.setPadding(new Insets(15));
 
-        // TODO turn local variables into fields :(
+
+
 
         mainAreaHBox.getChildren().add(fileListView);
         mainAreaHBox.getChildren().add(btnContainer);
