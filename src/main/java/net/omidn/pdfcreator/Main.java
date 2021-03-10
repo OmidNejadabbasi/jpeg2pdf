@@ -99,6 +99,12 @@ public class Main extends Application {
             }
         });
 
+        // remove button action
+        removeBtn.setOnAction(event -> {
+            currentFileInList.removeAll(fileListView.getSelectionModel().getSelectedItems());
+        });
+
+
 
         mainAreaHBox.getChildren().add(fileListView);
         mainAreaHBox.getChildren().add(btnContainer);
