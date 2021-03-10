@@ -113,6 +113,7 @@ public class Main extends Application {
             }
         };
         addFilesMenuItem.setOnAction(addFilesActionEvent);
+        addFilesBtn.setOnAction(addFilesActionEvent);
 
         // remove button action
         removeBtn.setOnAction(event -> {
