@@ -25,7 +25,7 @@ public class Main extends Application {
     VBox rootContainer;
     MenuItem addFilesMenuItem;
     MenuItem saveAsMenuItem;
-    MenuItem quiteMenuItem;
+    MenuItem quitMenuItem;
     Menu helpMenu;
     MenuItem aboutMenuItem;
     MenuBar appMenuBar;
@@ -51,8 +51,8 @@ public class Main extends Application {
         fileMenu = new Menu("File");
         addFilesMenuItem = new MenuItem("Add Files...");
         saveAsMenuItem = new MenuItem("Save As...");
-        quiteMenuItem = new MenuItem("Quite");
-        fileMenu.getItems().addAll(addFilesMenuItem, saveAsMenuItem, quiteMenuItem);
+        quitMenuItem = new MenuItem("Quit");
+        fileMenu.getItems().addAll(addFilesMenuItem, saveAsMenuItem, quitMenuItem);
 
         // help menu
         helpMenu = new Menu("Help");
@@ -155,7 +155,7 @@ public class Main extends Application {
 
 
         // quite action on menu item
-        quiteMenuItem.setOnAction(event -> {
+        quitMenuItem.setOnAction(event -> {
             primaryStage.close();
             Platform.exit();
             System.exit(0);
