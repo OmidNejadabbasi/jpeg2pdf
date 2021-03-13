@@ -1,7 +1,12 @@
-/* for testing */
-.button{
-    -fx-font-family: monospace;
+@font-face{
+    font-family: 'rajdhani-light';
+    src: url('Rajdhani-Light.ttf');
 
+}
+
+.button{
+    -fx-font-family: rajdhani-light;
+    -fx-border-radius: 0.5cm;
 }
 
 .button:hover{
