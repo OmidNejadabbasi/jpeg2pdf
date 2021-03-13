@@ -11,10 +11,15 @@
     -fx-background-color: #00000000;
     -fx-background-radius: 10px;
     -fx-border-width: 2px;
-    -fx-border-color: linear-gradient(from 0% 0% to 100% 100%, rgba(153,50,0,1) 0%, rgba(255,0,196,1) 100%);;
+    -fx-border-color: linear-gradient(from 0% 0% to 100% 100%, rgba(153,50,0,1) 0%, rgba(255,0,196,1) 100%);
     -fx-border-radius: 10px;
 }
 
 .button:hover{
     -fx-background-color: #ddd;
+}
+
+.list-view{
+    -fx-border-color: linear-gradient(from 0% 0% to 100% 100%, rgba(153,50,0,.6) 0%, rgba(255,0,196,.6) 100%);
+    -fx-border-width: 2px;
 }

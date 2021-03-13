@@ -90,6 +90,7 @@ public class Main extends Application {
 
         Pane _space = new Pane();
         btnContainer.getChildren().addAll(removeBtn, moveUpBtn, moveDownBtn, _space, saveAsBtn);
+        btnContainer.setSpacing(1);
         VBox.setVgrow(_space, Priority.ALWAYS);
 
         removeBtn.setMaxWidth(Double.MAX_VALUE);
