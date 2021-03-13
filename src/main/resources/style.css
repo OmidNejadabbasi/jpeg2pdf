@@ -7,7 +7,7 @@
 .button{
 
     -fx-font-family: rajdhani-light;
-    -fx-font-size: 18px;
+    -fx-font-size: 15px;
     -fx-background-color: #00000000;
     -fx-background-radius: 10px;
     -fx-border-width: 2px;
@@ -22,4 +22,8 @@
 .list-view{
     -fx-border-color: linear-gradient(from 0% 0% to 100% 100%, rgba(153,50,0,.6) 0%, rgba(255,0,196,.6) 100%);
     -fx-border-width: 2px;
+}
+
+#add-btn{
+    -fx-font-size: 22px;
 }
