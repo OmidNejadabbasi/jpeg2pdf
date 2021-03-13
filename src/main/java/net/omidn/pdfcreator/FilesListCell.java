@@ -30,7 +30,7 @@ public class FilesListCell extends ListCell<String> {
     public FilesListCell() {
         super();
         container = new HBox();
-        container.setPadding(new Insets(5, 0, 5, 10));
+        container.setPadding(new Insets(3, 0, 3, 7));
         container.setSpacing(7.0);
         container.setAlignment(Pos.CENTER_LEFT);
         // imageview setup
@@ -57,7 +57,7 @@ public class FilesListCell extends ListCell<String> {
             setGraphic(null);
         } else {
             File file = new File(item);
-            Image thumbnailImg = new Image("file:///"+item, 60, 45, false, false);
+            Image thumbnailImg = new Image("file:///"+item, 80, 60, false, false);
             thumbnail.setImage(thumbnailImg);
             fileNameLabel.setText("File: " + file.getName());
             fileSizeLabel.setText("Size: " + humanReadableByteCountBin(file.length()));
