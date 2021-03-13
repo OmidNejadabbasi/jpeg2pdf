@@ -88,7 +88,7 @@ public class Main extends Application {
         saveAsBtn = new Button("Save As...");
 
 
-        Pane _space =new Pane();
+        Pane _space = new Pane();
         btnContainer.getChildren().addAll(removeBtn, moveUpBtn, moveDownBtn, _space, saveAsBtn);
         VBox.setVgrow(_space, Priority.ALWAYS);
 
@@ -121,7 +121,7 @@ public class Main extends Application {
         // remove button action
         removeBtn.setOnAction(event -> {
             currentFileInList.removeAll(fileListView.getSelectionModel().getSelectedItems());
-            if (currentFileInList.size() == 0){
+            if (currentFileInList.size() == 0) {
                 addFilesBtn.setVisible(true);
             }
         });
@@ -129,7 +129,7 @@ public class Main extends Application {
         // move up button action
         moveUpBtn.setOnAction(event -> {
             ObservableList<Integer> items;
-            if ((items = fileListView.getSelectionModel().getSelectedIndices()) != null) {
+            if ((items = fileListView.getSelectionModel().getSelectedIndices()) != null && currentFileInList.size() > 0) {
 
                 int itemIndex = items.get(0);
                 if (itemIndex != 0) {
@@ -143,7 +143,7 @@ public class Main extends Application {
 
         moveDownBtn.setOnAction(event -> {
             ObservableList<Integer> items;
-            if ((items = fileListView.getSelectionModel().getSelectedIndices()) != null) {
+            if ((items = fileListView.getSelectionModel().getSelectedIndices()) != null && currentFileInList.size() > 0) {
 
                 int itemIndex = items.get(0);
                 if (itemIndex != currentFileInList.size() - 1) {
@@ -172,7 +172,7 @@ public class Main extends Application {
             destFileChooser.setTitle("Choose your destination PDF file: ");
             destFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF file(*.pdf)", "*.pdf"));
             File destFile = destFileChooser.showSaveDialog(primaryStage);
-            if (destFile != null){
+            if (destFile != null) {
                 try {
                     JPEG2PDFCore.saveFileAsPDF(currentFileInList, destFile);
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "The file was saved successfully :)");
