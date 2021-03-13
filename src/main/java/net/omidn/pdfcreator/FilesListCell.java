@@ -2,21 +2,21 @@ package net.omidn.pdfcreator;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.text.CharacterIterator;
+import java.text.SimpleDateFormat;
 import java.text.StringCharacterIterator;
+import java.util.Date;
 
 public class FilesListCell extends ListCell<String> {
 
@@ -24,7 +24,7 @@ public class FilesListCell extends ListCell<String> {
     private ImageView thumbnail;
     private VBox detailsContainer;
     private Label fileNameLabel;
-    private Label fileSizeLabel;
+    private Label metadataLabel;
 
 
     public FilesListCell() {
@@ -40,9 +40,9 @@ public class FilesListCell extends ListCell<String> {
         detailsContainer = new VBox();
         detailsContainer.setAlignment(Pos.CENTER_LEFT);
         fileNameLabel = new Label();
-        fileSizeLabel = new Label();
+        metadataLabel = new Label();
 
-        detailsContainer.getChildren().addAll(fileNameLabel, fileSizeLabel);
+        detailsContainer.getChildren().addAll(fileNameLabel, metadataLabel);
 
         container.getChildren().addAll(thumbnail, detailsContainer);
 
@@ -57,22 +57,23 @@ public class FilesListCell extends ListCell<String> {
             setGraphic(null);
         } else {
             File file = new File(item);
-            Image thumbnailImg = new Image("file:///"+item, 80, 60, false, false);
+            Image thumbnailImg = new Image("file:///" + item, 80, 60, false, false);
             thumbnail.setImage(thumbnailImg);
             fileNameLabel.setText("File: " + file.getName());
-            fileSizeLabel.setText("Size: " + humanReadableByteCountBin(file.length()));
+
+            metadataLabel.setText("Size: " + humanReadableByteCountBin(file.length()) + "     Last Modified: " + epochAsString(file.lastModified()));
 
             container.setOnMouseClicked(event -> {
-                if(event.getClickCount()==2){
+                if (event.getClickCount() == 2) {
                     Stage imagePreviewStage = new Stage();
-                    Image img = new Image("file:///"+item);
+                    Image img = new Image("file:///" + item);
                     ImageView imageView = new ImageView(img);
                     ScrollPane pane = new ScrollPane(imageView);
                     Scene scene = new Scene(pane);
                     imagePreviewStage.setHeight(700);
                     imagePreviewStage.setWidth(1000);
                     imagePreviewStage.setScene(scene);
-                    imagePreviewStage.setTitle("File: "+ item);
+                    imagePreviewStage.setTitle("File: " + item);
                     imagePreviewStage.show();
                 }
             });
@@ -101,6 +102,19 @@ public class FilesListCell extends ListCell<String> {
         }
         value *= Long.signum(bytes);
         return String.format("%.1f %ciB", value / 1024.0, ci.current());
+    }
+
+    /**
+     * Returns a more readable form for the epoch seconds passed.
+     *
+     * @param epochTime the UNIX-time that should be formatted
+     * @return a string a in the form  <code>yyyy/MM/dd, HH:mm</code>
+     */
+    public static String epochAsString(long epochTime) {
+        Date date = new Date(epochTime);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd, HH:mm");
+        return dateFormat.format(date);
     }
 
 }
