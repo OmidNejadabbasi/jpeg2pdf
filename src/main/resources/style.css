@@ -1,0 +1,9 @@
+/* for testing */
+.button{
+    -fx-font-family: monospace;
+
+}
+
+.button:hover{
+    -fx-background-color: #ddd;
+}

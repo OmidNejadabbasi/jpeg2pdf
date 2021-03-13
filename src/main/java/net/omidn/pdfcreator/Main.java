@@ -193,6 +193,9 @@ public class Main extends Application {
 
         rootContainer.getChildren().addAll(appMenuBar, mainAreaHBox);
         scene = new Scene(rootContainer, 700, 400);
+
+        // adding style
+        scene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toString());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Prototype");
         primaryStage.show();
