@@ -188,6 +188,14 @@ public class Main extends Application {
         saveAsBtn.setOnAction(saveAsActionEvent);
         saveAsMenuItem.setOnAction(saveAsActionEvent);
 
+
+        // setting style IDs on views
+        removeBtn.setId("remove-btn");
+        moveDownBtn.setId("move-down-btn");
+        moveUpBtn.setId("move-up-btn");
+        saveAsBtn.setId("save-btn");
+        addFilesBtn.setId("add-btn");
+
         mainAreaHBox.getChildren().add(listStackPane);
         mainAreaHBox.getChildren().add(btnContainer);
 
