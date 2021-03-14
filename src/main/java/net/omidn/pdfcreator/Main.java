@@ -209,7 +209,7 @@ public class Main extends Application {
         // adding style
         scene.getStylesheets().add(getClass().getClassLoader().getResource("style.css").toString());
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Prototype");
+        primaryStage.setTitle("JPEG to pdf converter");
         primaryStage.show();
     }
 
