@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.management.StandardEmitterMBean;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -188,7 +189,9 @@ public class Main extends Application {
 
         saveAsBtn.setOnAction(saveAsActionEvent);
         saveAsMenuItem.setOnAction(saveAsActionEvent);
-
+        aboutMenuItem.setOnAction(event -> {
+            showAboutDialog();
+        });
 
         // setting style IDs on views
         removeBtn.setId("remove-btn");
@@ -208,6 +211,29 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Prototype");
         primaryStage.show();
+    }
+
+
+    private void showAboutDialog(){
+        Stage stage = new Stage();
+
+        VBox vBox=new VBox();
+        vBox.setPadding(new Insets(20, 10, 20, 8));
+        vBox.setSpacing(10);
+        Label aboutLabel = new Label("Converting images to PDF files.\nDeveloped by Omid Nejadabbasi.\n\n" +
+                "© Open source under Apache License v2");
+
+        aboutLabel.setStyle("-fx-font-size: 18px; -fx-color: #222;");
+
+        Hyperlink githubLink = new Hyperlink("View source on Github");
+        githubLink.setOnAction(event -> {
+            getHostServices().showDocument("https://github.com/OmidNejadabbasi/jpeg2pdf");
+        });
+        vBox.getChildren().addAll(aboutLabel, githubLink);
+        Scene scene = new Scene(vBox);
+        stage.setScene(scene);
+        stage.setTitle("About!");
+        stage.show();
     }
 
     public static void main(String[] args) {
