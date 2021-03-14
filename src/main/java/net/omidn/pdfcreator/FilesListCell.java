@@ -42,10 +42,12 @@ public class FilesListCell extends ListCell<String> {
         fileNameLabel = new Label();
         metadataLabel = new Label();
 
+        fileNameLabel.setId("file-name-label");
+        metadataLabel.setId("meta-label");
+
         detailsContainer.getChildren().addAll(fileNameLabel, metadataLabel);
 
         container.getChildren().addAll(thumbnail, detailsContainer);
-
     }
 
     @Override

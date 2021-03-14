@@ -27,3 +27,17 @@
 #add-btn{
     -fx-font-size: 22px;
 }
+
+.list-cell:focused{
+    -fx-background-color: #ff4daf96;
+}
+
+
+#file-name-label {
+    -fx-font-size: 14px;
+    -fx-color: #222;
+}
+#meta-label {
+    -fx-font-size: 10px;
+    -fx-color: #444;
+}
