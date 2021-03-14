@@ -29,7 +29,7 @@
 }
 
 .list-cell:focused{
-    -fx-background-color: #ff4daf96;
+    -fx-background-color: #3ad2eca8;
 }
 
 
@@ -40,4 +40,12 @@
 #meta-label {
     -fx-font-size: 10px;
     -fx-color: #444;
+}
+
+.menu:hover , .menu:showing{
+    -fx-background-color: #37ced396;
+}
+
+.menu-item:hover{
+    -fx-background-color: #4fcab596;
 }
