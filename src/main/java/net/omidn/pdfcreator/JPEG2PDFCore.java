@@ -16,7 +16,8 @@ public class JPEG2PDFCore {
     /**
      * Creates a PDF file from input images and saves it in the <code>destFile</code>.
      * Each page in the PDF has a width of a A4 paper but the height may vary.
-     * @param files the name of the input files
+     *
+     * @param files    the name of the input files
      * @param destFile destination file
      * @throws IOException if any read or write error occurs.
      */
@@ -41,8 +42,7 @@ public class JPEG2PDFCore {
                 e.printStackTrace();
             }
         }
-
-       pdfFile.save(destFile);
+        pdfFile.save(destFile);
 
     }
 
